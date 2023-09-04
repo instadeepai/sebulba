@@ -1,0 +1,33 @@
+# Copyright 2023 Instadeep Inc
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+_target_: sebulba.agents.ppo.PPOAgentBuilder
+config:
+  max_grad_norm: 0.5
+  anneal_lr: True
+  learning_rate: 2.5e-4
+  num_minibatches: 4
+  update_epochs: 4
+  total_timesteps: 50_000_000 #50000000
+  norm_adv: True
+  clip_coef: 0.1
+  ent_coef: 0.01
+  vf_coef: 0.5
+  gae_lambda: 0.95
+  gamma: 0.99
+  n_action: ${env.specs.n_action}
+  obs_shape: ${env.specs.obs_shape}
+  traj_len: ${common.traj_len}
+  batch_size: ${common.batch_size}
+  num_learner_device: ${len:${learner.devices}}

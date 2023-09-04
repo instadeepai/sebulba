@@ -1,0 +1,36 @@
+# @package __global_
+defaults:
+  - override /agents: /ppo
+
+env:
+  name: Breakout-v5
+  specs: ${get_env_specs:${env.name}}
+
+loggers:
+  name: Breakout PPO
+  tags:
+  - ppo
+
+learner:
+  devices:  [1, 2, 3]
+
+actor:
+  devices: [0]
+  actor_per_device: 10
+
+agents:
+  config:
+    learning_rate: 0.001
+    num_minibatches: 16
+    update_epochs: 2
+    total_timesteps: 100_000_000
+
+common:
+  traj_len: 64
+  batch_size:  256
+
+stopper:
+  _target_: sebulba.stoppers.LearnerStepStopper
+  _partial_: true
+  config:
+    num_steps: ${agents.config.total_timesteps}

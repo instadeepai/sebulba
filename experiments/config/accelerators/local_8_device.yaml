@@ -1,0 +1,11 @@
+# @package __global_
+learner:
+  devices: [2, 3, 4, 5, 6, 7]
+
+actor:
+  devices: [0, 1]
+  actor_per_device: 2
+
+common:
+  traj_len: 20
+  batch_size: 12

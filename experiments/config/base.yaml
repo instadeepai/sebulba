@@ -1,0 +1,36 @@
+defaults:
+  - agents: ppo
+  - loggers: tensorboard
+  - queue
+
+seed: 42
+env:
+  seed: ${seed}
+  name: Pong-v5
+  specs: ${get_env_specs:${env.name}}
+
+loggers:
+  name: "No Name"
+  tags: []
+
+common:
+  traj_len: 60
+  batch_size: 64
+
+learner:
+  devices: [2,3,4,5,6,7]
+  local_batch_size: ${common.batch_size}
+  traj_len: ${common.traj_len}
+
+actor:
+  devices: [0, 1]
+  actor_per_device: 4
+  envs_per_actor: ${compute_num_envs:${common.batch_size},${learner.devices}}
+  traj_len: ${common.traj_len}
+
+
+stopper:
+  _target_: sebulba.stoppers.TimeStopper
+  _partial_: true
+  config:
+    wait_time: 120 # just test for 2 minute

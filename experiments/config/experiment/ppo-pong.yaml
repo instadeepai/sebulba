@@ -1,0 +1,28 @@
+# @package _global_
+
+defaults:
+  - override /agents: /ppo
+
+env:
+  name: Pong-v5
+  specs: ${get_env_specs:${env.name}}
+
+loggers:
+  name: Pong PPO
+  tags:
+  - ppo
+
+agents:
+  config:
+    update_epochs: 1
+    total_timesteps: 50_000_000
+
+common:
+  traj_len: 60
+  batch_size: 128
+
+stopper:
+  _target_: sebulba.stoppers.LearnerStepStopper
+  _partial_: true
+  config:
+    num_steps: ${agents.config.total_timesteps}
