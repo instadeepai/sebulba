@@ -27,7 +27,7 @@
 
 <div align="center">
     <h3>
-      <a href="#TODO">Blog Post</a> |
+      <a href="https://cloud.google.com/blog/products/compute/instadeep-performs-reinforcement-learning-on-cloud-tpus">Blog Post</a> |
       <a href="#quickstart-">Quickstart</a> |
       <a href="#architecture-">Architecture</a> |
       <a href="#benchmarks-">Benchmarks</a> |
